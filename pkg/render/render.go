@@ -26,7 +26,16 @@ func NewTemplates(a *config.AppConfig) {
 }
 
 func RenderTemplate(w http.ResponseWriter, tmpl string) {
-	tc := app.TemplateCache
+	var tc map[string]*template.Template
+	// this is just for the developer mode
+	// if USe cache is true then use it
+	// otherwise rebuild it
+	// and in main we will set it to false
+	if app.UseCache {
+		tc = app.TemplateCache
+	} else {
+		tc, _ = CreateTemplateCache()
+	}
 
 	// having all the ts
 	t, ok := tc[tmpl]

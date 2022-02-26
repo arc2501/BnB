@@ -22,11 +22,17 @@ func main() {
 	}
 	// app holding template cache
 	app.TemplateCache = tc
+	app.UseCache = false
+
+	// create a new repo object
+	repo := handlers.NewRepo(&app)
+	// pass it back to newhandler
+	handlers.NewHandlers(repo)
 
 	render.NewTemplates(&app)
 
-	http.HandleFunc("/", handlers.Home)
-	http.HandleFunc("/about", handlers.About)
+	http.HandleFunc("/", handlers.Repo.Home)
+	http.HandleFunc("/about", handlers.Repo.About)
 	fmt.Println("Starting Server at localhost", portNumber)
 	http.ListenAndServe(portNumber, nil)
 

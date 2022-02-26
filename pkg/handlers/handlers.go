@@ -13,7 +13,7 @@ type Repository struct {
 
 var Repo *Repository
 
-// NewRepo creates a new Repository
+// NewRepo creates a new Repository instance
 func NewRepo(a *config.AppConfig) *Repository {
 	return &Repository{
 		App: a,
@@ -25,11 +25,12 @@ func NewHandlers(r *Repository) {
 	Repo = r
 }
 
-func Home(w http.ResponseWriter, r *http.Request) {
+// Giving Handlers a reciever so that all of them can have access to app config
+func (m *Repository) Home(w http.ResponseWriter, r *http.Request) {
 	render.RenderTemplate(w, "home.page.html")
 }
 
-func About(w http.ResponseWriter, r *http.Request) {
+func (m *Repository) About(w http.ResponseWriter, r *http.Request) {
 	render.RenderTemplate(w, "about.page.html")
 
 }
