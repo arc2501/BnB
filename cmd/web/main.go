@@ -4,7 +4,9 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"time"
 
+	"github.com/alexedwards/scs/v2"
 	"github.com/arc2501/bnb/pkg/config"
 	"github.com/arc2501/bnb/pkg/handlers"
 	"github.com/arc2501/bnb/pkg/render"
@@ -12,9 +14,27 @@ import (
 
 const portNumber = ":8080"
 
+// create a global app variable
+var app config.AppConfig
+
+// declare session so that in future can be used by middleware and all
+var session *scs.SessionManager
+
 func main() {
-	// create a local app variable
-	var app config.AppConfig
+
+	// change this to true when in production
+	app.InProduction = false
+
+	// initializing a session variable
+	session = scs.New()
+	// defining its parameter
+	session.Lifetime = 24 * time.Hour
+	session.Cookie.Persist = true
+	session.Cookie.SameSite = http.SameSiteLaxMode
+	session.Cookie.Secure = app.InProduction
+
+	// intitialize this above session on the app.Session
+	app.Session = session
 	// get the template cache from app config
 	tc, err := render.CreateTemplateCache()
 	if err != nil {
@@ -31,9 +51,13 @@ func main() {
 
 	render.NewTemplates(&app)
 
-	http.HandleFunc("/", handlers.Repo.Home)
-	http.HandleFunc("/about", handlers.Repo.About)
+	srv := &http.Server{
+		Addr:    portNumber,
+		Handler: routes(&app),
+	}
+
 	fmt.Println("Starting Server at localhost", portNumber)
-	http.ListenAndServe(portNumber, nil)
+	err = srv.ListenAndServe()
+	log.Fatal(err)
 
 }

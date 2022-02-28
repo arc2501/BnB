@@ -7,7 +7,19 @@
     <div class="row">
         <div class="col">
             <h1>This is about page</h1>
-            <p>This is para of text about ye hai mere bhai heheh</p>
+            <p>This is para of text</p>
+            <!--I am looking for something having indices and I am using all the data passed
+                to it, in which I am looking for StringMap where key is test-->
+            <p>This came from the template: {{index .StringMap "test"}}</p>
+
+            <p>
+                <!--If remote ip is not empty string means if it has values-->
+                {{if ne (index .StringMap "remote_ip") ""}}
+                    Your Remote IP address is  {{index .StringMap "remote_ip"}}
+                {{else}}
+                    I dont know your ip, hence visit the <a href="/">Home page</a> so I can set it
+                {{end}}
+            </p>
         </div>
     </div>
 </div>
