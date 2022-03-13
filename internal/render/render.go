@@ -10,6 +10,7 @@ import (
 
 	"github.com/arc2501/bnb/pkg/config"
 	"github.com/arc2501/bnb/pkg/models"
+	"github.com/justinas/nosurf"
 )
 
 // This is for those things which we cannot do inside Go
@@ -26,12 +27,12 @@ func NewTemplates(a *config.AppConfig) {
 	app = a
 }
 
-func AddDefaultData(td *models.TemplateData) *models.TemplateData {
-	//	td.StringMap["default"] = "This is Default Data"
+func AddDefaultData(td *models.TemplateData, r *http.Request) *models.TemplateData {
+	td.CSRFToken = nosurf.Token(r)
 	return td
 }
 
-func RenderTemplate(w http.ResponseWriter, tmpl string, td *models.TemplateData) {
+func RenderTemplate(w http.ResponseWriter, r *http.Request, tmpl string, td *models.TemplateData) {
 	var tc map[string]*template.Template
 	// this is just for the developer mode
 	// if USe cache is true then use it
@@ -51,7 +52,7 @@ func RenderTemplate(w http.ResponseWriter, tmpl string, td *models.TemplateData)
 	// writing that ts content to the buffer
 	buf := new(bytes.Buffer)
 
-	td = AddDefaultData(td)
+	td = AddDefaultData(td, r)
 	_ = t.Execute(buf, td)
 	// Making that buffer object write to the Response Writer
 	_, err := buf.WriteTo(w)

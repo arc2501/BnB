@@ -1,15 +1,17 @@
+@charset "UTF-8";
+
 .my-footer{
     height: 5em;
     background-color: black;
     margin-top: 1em;
     padding: 1em;
-    color:white
+    color:white;
   }
 
-  .room-image{
-      max-width: 50%;
-  }
-  /* you dont need it as it is already updated */
-  .datepicker{
-    z-index: 10000;
-  }
+.room-image{
+    max-width: 50%;
+}
+/* you dont need it as it is already updated */
+.datepicker{
+  z-index: 10000;
+}

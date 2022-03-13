@@ -1,13 +1,49 @@
 <!--Use the template name Base-->
 {{template  "base" .}}
+
 <!--in the base template wherever you find content block insert this-->
 {{define "content"}}
+<div id="main-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#main-carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#main-carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#main-carousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
 
+
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="/static/images/breakfast.jpg" class="d-block w-100" alt="breakfast">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>First slide label</h5>
+          <p>Our Manali Breakfast.</p>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="/static/images/chill2.jpg" class="d-block w-100" alt="chill2">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Second slide label</h5>
+          <p>Us Chilling at Rohtang.</p>
+        </div>
+      </div>s
+      <div class="carousel-item">
+        <img src="/static/images/relax.jpg" class="d-block w-100" alt="relax">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Third slide label</h5>
+          <p>Relaxing in Manali.</p>
+        </div>
+      </div>
+    </div>
+  </div>
 <div class="container">
     <div class="row">
         <div class="col">
             <h1>This is home page</h1>
-            <p>This is para hai bhai improvement hua hai</p>
+            <p>Manali is a high-altitude Himalayan resort town in India’s northern Himachal Pradesh state. 
+                It has a reputation as a backpacking center and honeymoon destination. Set on the Beas River,
+                it’s a gateway for skiing in the Solang Valley and trekking in Parvati Valley. 
+                It's also a jumping-off point for paragliding, rafting and mountaineering in the Pir Panjal mountains,
+                home to 4,000m-high Rohtang Pass.</p>
         </div>
     </div>
 </div>

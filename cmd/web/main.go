@@ -7,9 +7,9 @@ import (
 	"time"
 
 	"github.com/alexedwards/scs/v2"
-	"github.com/arc2501/bnb/pkg/config"
-	"github.com/arc2501/bnb/pkg/handlers"
-	"github.com/arc2501/bnb/pkg/render"
+	"github.com/arc2501/bnb/internal/config"
+	"github.com/arc2501/bnb/internal/handlers"
+	"github.com/arc2501/bnb/internal/render"
 )
 
 const portNumber = ":8080"
