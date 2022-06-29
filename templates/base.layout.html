@@ -112,34 +112,8 @@ So here is a Base template which might have css entry, javascript entry etc-->
                     form.classList.add('was-validated')
                     }, false);
                 })
-            })();
+            })();          
             
-            // document.getElementById("check-availability-button").addEventListener("click", function(){
-
-            //     let html = `
-            //     <form id="check-availability-form" action="" method="post" novalidate class="needs-validation">
-            //     <div class="row">
-            //         <div class="col">
-            //         <div class="row" id="reservation-dates-modal">
-            //             <div class="col">
-            //             <input disabled required class="form-control" type="text" name="start" id="start" placeholder="Arrival">
-            //             </div>
-            //             <div class="col">
-            //             <input disabled required class="form-control" type="text" name="end" id="end" placeholder="Departure">
-            //             </div>
-            //         </div>
-            //         </div>
-            //     </div>
-            //     </form>
-            //     `
-
-            //     attention.custom({msg:html, title: "Select the dates"});
-            // })
-
-            // const elem = document.getElementById('reservation-date');
-            // const rangepicker = new DateRangePicker(elem, {
-            //     format: "dd-mm-yyyy",
-            // });
 
 
             function notify(msg, msgType){
@@ -157,6 +131,18 @@ So here is a Base template which might have css entry, javascript entry etc-->
                 confirmationButtonText: confirmationButtonText
                 })
             }
+
+            // {{with .Error}}
+            // notify("{{.}}","error");
+            // {{end}}
+
+            // {{with .Flash}}
+            // notify("{{.}}","success");
+            // {{end}}
+
+            // {{with .warning}}
+            // notify("{{.}}","warning");
+            // {{end}}
 
             function Prompt(){
                 let toast = function(c){

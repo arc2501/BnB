@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/gob"
 	"fmt"
 	"log"
 	"net/http"
@@ -9,6 +10,7 @@ import (
 	"github.com/alexedwards/scs/v2"
 	"github.com/arc2501/bnb/internal/config"
 	"github.com/arc2501/bnb/internal/handlers"
+	"github.com/arc2501/bnb/internal/models"
 	"github.com/arc2501/bnb/internal/render"
 )
 
@@ -21,9 +23,12 @@ var app config.AppConfig
 var session *scs.SessionManager
 
 func main() {
-
+	// what I am going to put in the session
+	gob.Register(models.Reservation{})
 	// change this to true when in production
 	app.InProduction = false
+	// set it to true when not in Developer Mode
+	app.UseCache = false
 
 	// initializing a session variable
 	session = scs.New()
@@ -42,7 +47,6 @@ func main() {
 	}
 	// app holding template cache
 	app.TemplateCache = tc
-	app.UseCache = false
 
 	// create a new repo object
 	repo := handlers.NewRepo(&app)
